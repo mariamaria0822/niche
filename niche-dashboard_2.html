@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niche — Executive Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* canvas */
+  --bg:#FAFAF8;
+  --surface:#FFFFFF;
+  --card:#FFFFFF;
+  --card-fill:#F5F4F1;
+  /* borders */
+  --border:#E8E6E1;
+  --border-strong:#D4D1CB;
+  /* text */
+  --text:#1A1916;
+  --text-2:#4A4845;
+  --text-3:#8A8780;
+  /* accents — used sparingly */
+  --green:#16A34A;
+  --green-bg:#F0FDF4;
+  --green-border:#BBF7D0;
+  --amber:#B45309;
+  --amber-bg:#FFFBEB;
+  --amber-border:#FDE68A;
+  --red:#B91C1C;
+  --red-bg:#FEF2F2;
+  --red-border:#FECACA;
+  --violet:#5B21B6;
+  --violet-bg:#F5F3FF;
+  --violet-border:#DDD6FE;
+  --blue:#1D4ED8;
+  --blue-bg:#EFF6FF;
+  --blue-border:#BFDBFE;
+  --teal:#0F766E;
+  --teal-bg:#F0FDFA;
+  --teal-border:#99F6E4;
+  /* ink — primary brand accent */
+  --ink:#1A1916;
+  /* layout */
+  --nav-w:228px;
+  --top-h:54px;
+  --radius:10px;
+  --radius-sm:6px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+  font-size:14px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+strong{font-weight:600}
+
+/* ── TOPBAR ── */
+#topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--top-h);
+  background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 0 0 0;z-index:200;gap:0;
+}
+#topbar .brand-zone{
+  width:var(--nav-w);min-width:var(--nav-w);height:100%;
+  background:#18181B;border-right:1px solid #27272A;
+  display:flex;align-items:center;padding:0 20px;flex-shrink:0;
+}
+#topbar .brand{
+  font-family:'DM Mono',monospace;font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;color:#FFFFFF;
+}
+#topbar .topbar-right{
+  display:flex;align-items:center;gap:16px;
+  padding:0 24px;flex:1;
+}
+#topbar .divider{width:1px;height:18px;background:var(--border)}
+#topbar .subtitle{font-size:12px;color:var(--text-3);letter-spacing:.01em}
+#topbar .badge{
+  margin-left:auto;
+  background:var(--green-bg);color:var(--green);
+  border:1px solid var(--green-border);
+  font-size:10px;font-weight:600;letter-spacing:.04em;
+  padding:4px 12px;border-radius:20px;white-space:nowrap;
+}
+#menu-toggle{display:none;background:none;border:none;color:var(--text-3);font-size:20px;margin-left:auto;line-height:1}
+
+/* ── LEFT NAV ── */
+#sidenav{
+  position:fixed;top:var(--top-h);left:0;bottom:0;width:var(--nav-w);
+  background:#18181B;border-right:1px solid #27272A;
+  overflow-y:auto;z-index:100;padding:20px 0 24px;
+  display:flex;flex-direction:column;
+}
+#sidenav::-webkit-scrollbar{width:0}
+.nav-item{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 20px;font-size:13px;font-weight:400;
+  color:#A1A1AA;background:none;border:none;
+  text-align:left;width:100%;
+  border-left:2px solid transparent;
+  transition:color .12s,background .12s;white-space:nowrap;
+  border-radius:0;
+}
+.nav-item:hover{color:#E4E4E7;background:#27272A}
+.nav-item.active{
+  color:#FFFFFF;font-weight:500;
+  border-left-color:#FFFFFF;background:#27272A;
+}
+.nav-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:#52525B;flex-shrink:0;
+}
+.nav-item.active .nav-dot{background:#FFFFFF}
+.nav-section-label{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:#52525B;padding:20px 20px 6px;
+  font-family:'DM Mono',monospace;
+}
+
+/* ── MAIN ── */
+#main{
+  margin-left:var(--nav-w);margin-top:var(--top-h);
+  padding:40px 40px 80px;
+  max-width:calc(960px + var(--nav-w));
+}
+
+/* ── SECTIONS ── */
+.section{display:none}
+.section.active{display:block}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-3);font-weight:500;margin-bottom:8px;
+}
+.page-title{
+  font-size:26px;font-weight:700;color:var(--text);
+  line-height:1.2;margin-bottom:8px;letter-spacing:-.02em;
+}
+.page-sub{
+  font-size:14px;color:var(--text-2);max-width:560px;
+  margin-bottom:32px;line-height:1.7;
+}
+.mono{font-family:'DM Mono',monospace}
+.label{
+  font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--text-3);font-weight:500;margin-bottom:5px;
+}
+.section-h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+.section-sub{font-size:12px;color:var(--text-3);margin-bottom:12px;padding-left:13px}
+
+/* ── CARDS ── */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 22px;
+}
+.card-fill{
+  background:var(--card-fill);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 22px;
+}
+.card-accent{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 22px;
+}
+.card-accent.green{border-left:3px solid var(--green)}
+.card-accent.amber{border-left:3px solid var(--amber)}
+.card-accent.red{border-left:3px solid var(--red)}
+.card-accent.violet{border-left:3px solid var(--violet)}
+.card-accent.blue{border-left:3px solid var(--blue)}
+.card-accent.teal{border-left:3px solid var(--teal)}
+.card-accent.ink{border-left:3px solid var(--ink)}
+.card-accent.muted{border-left:3px solid var(--border-strong)}
+
+/* ── TAGS / BADGES ── */
+.tag{
+  display:inline-flex;align-items:center;
+  font-size:10px;font-weight:500;letter-spacing:.02em;
+  padding:2px 8px;border-radius:4px;
+  flex-shrink:0;white-space:nowrap;
+}
+.tag-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.tag-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.tag-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.tag-violet{background:var(--violet-bg);color:var(--violet);border:1px solid var(--violet-border)}
+.tag-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.tag-teal{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-border)}
+.tag-dark{background:var(--card-fill);color:var(--text-2);border:1px solid var(--border)}
+.tag-muted{background:var(--card-fill);color:var(--text-3);border:1px solid var(--border)}
+
+/* map old colour names to new semantic names for HTML compatibility */
+.tag-lime{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.tag-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.tag-purple{background:var(--violet-bg);color:var(--violet);border:1px solid var(--violet-border)}
+.card-accent.lime{border-left:3px solid var(--green)}
+.card-accent.danger{border-left:3px solid var(--red)}
+.card-accent.purple{border-left:3px solid var(--violet)}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ga{display:grid;gap:12px}
+
+/* ── STAT TILE ── */
+.stat-tile{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px 20px;
+}
+.stat-val{
+  font-size:16px;font-weight:700;color:var(--text);
+  margin:4px 0 3px;line-height:1.2;letter-spacing:-.01em;
+}
+.stat-sub{font-size:12px;color:var(--text-3);line-height:1.5}
+
+/* ── KPI CARD ── */
+.kpi-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px 18px;
+}
+.kpi-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px}
+.kpi-why{font-size:12px;color:var(--text-2);line-height:1.65;margin-bottom:10px}
+.kpi-tags{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+
+/* ── INFLUENCE PIPS ── */
+.pips{display:flex;align-items:center;gap:3px}
+.pip{width:7px;height:7px;border-radius:50%}
+.pip-on{background:var(--green)}
+.pip-mid{background:var(--amber)}
+.pip-off{background:var(--border-strong)}
+.pips-label{font-size:10px;color:var(--text-3);font-weight:500;margin-left:4px}
+
+/* ── PRIORITY ITEM ── */
+.priority-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 22px;
+  display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;
+}
+.priority-num{font-size:22px;font-weight:700;line-height:1;color:var(--border-strong)}
+.priority-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.priority-why{font-size:13px;color:var(--text-2);line-height:1.7}
+.priority-ties{
+  display:flex;gap:5px;flex-wrap:wrap;
+  padding-top:10px;margin-top:10px;
+  border-top:1px solid var(--border);align-items:center;
+}
+.ties-label{font-size:10px;color:var(--text-3);font-weight:500;margin-right:2px}
+
+/* ── ROADMAP ── */
+.phase-header{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+.phase-stripe{width:3px;border-radius:2px;flex-shrink:0;min-height:52px}
+.roadmap-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;
+}
+.roadmap-item-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:10px;margin-bottom:6px;flex-wrap:wrap;
+}
+.roadmap-item-title{font-size:13px;font-weight:500;color:var(--text)}
+.roadmap-item-detail{font-size:12px;color:var(--text-2);line-height:1.65}
+
+/* ── GROWTH ENGINE ── */
+.engine-stage{display:grid;grid-template-columns:24px 1fr;gap:0;align-items:stretch}
+.engine-line-col{display:flex;flex-direction:column;align-items:center;padding-top:20px}
+.engine-dot{
+  width:12px;height:12px;border-radius:50%;
+  border:2px solid var(--bg);flex-shrink:0;
+}
+.engine-connector{width:1px;flex:1;margin:3px 0;min-height:20px;background:var(--border)}
+.engine-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px 18px;margin-bottom:6px;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;
+  gap:14px;align-items:start;
+}
+.engine-stage-name{font-size:13px;font-weight:600;margin-bottom:4px}
+.engine-detail{font-size:11px;color:var(--text-2);line-height:1.6}
+
+/* ── OPP / RISK ITEMS ── */
+.opp-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 22px;margin-bottom:10px;
+}
+.opp-header{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.opp-num{font-size:18px;font-weight:700;flex-shrink:0;line-height:1.2;color:var(--border-strong)}
+.opp-outcome{
+  border-top:1px solid var(--border);padding-top:10px;
+  margin-top:10px;font-size:12px;color:var(--text-2);
+}
+
+/* ── SCORECARD ── */
+.scorecard-row{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px 16px;margin-bottom:6px;
+  display:grid;grid-template-columns:2fr .8fr 1.2fr 1fr 1fr;
+  gap:12px;align-items:start;
+}
+.scorecard-header{
+  padding:4px 16px;display:grid;
+  grid-template-columns:2fr .8fr 1.2fr 1fr 1fr;
+  gap:12px;margin-bottom:4px;
+}
+.scorecard-col-label{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);font-weight:500}
+
+/* ── CONTROL ZONES ── */
+.zone-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;
+}
+.zone-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.zone-icon{font-size:18px}
+.zone-title{font-size:14px;font-weight:600}
+.zone-list{list-style:none;display:flex;flex-direction:column}
+.zone-list li{
+  font-size:12px;color:var(--text-2);
+  padding:5px 0;border-bottom:1px solid var(--border);
+  line-height:1.5;
+}
+.zone-list li:last-child{border-bottom:none}
+.zone-cant{margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
+.zone-cant-label{
+  font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--red);font-weight:500;margin-bottom:6px;
+}
+.zone-cant li{color:var(--red);border-bottom-color:transparent}
+
+/* ── COLLAPSIBLE ── */
+.collapse-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:8px;overflow:hidden;
+}
+.collapse-trigger{
+  width:100%;background:none;border:none;
+  padding:16px 20px;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;text-align:left;cursor:pointer;
+}
+.collapse-trigger:hover{background:var(--bg)}
+.collapse-trigger-title{font-size:14px;font-weight:500;color:var(--text)}
+.collapse-trigger-sub{font-size:12px;color:var(--text-3);margin-top:2px}
+.collapse-arrow{color:var(--text-3);font-size:14px;flex-shrink:0;transition:transform .2s}
+.collapse-arrow.open{transform:rotate(180deg)}
+.collapse-body{padding:0 20px 18px;border-top:1px solid var(--border);display:none}
+.collapse-body.open{display:block;padding-top:16px}
+
+/* ── DIVIDER ── */
+.div{border:none;border-top:1px solid var(--border);margin:24px 0}
+
+/* ── ALERT BOX ── */
+.alert{border-radius:var(--radius);padding:14px 18px;font-size:13px;line-height:1.7;margin-bottom:18px}
+.alert-lime{background:var(--green-bg);border:1px solid var(--green-border);color:var(--text)}
+.alert-amber{background:var(--amber-bg);border:1px solid var(--amber-border);color:var(--text)}
+.alert-danger{background:var(--red-bg);border:1px solid var(--red-border);color:var(--text)}
+
+/* ── NAV OVERLAY ── */
+#nav-overlay{display:none;position:fixed;inset:0;background:rgba(26,25,22,.35);z-index:90;backdrop-filter:blur(2px)}
+
+/* ── GROUP HEADER ── */
+.group-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.group-bar{width:3px;height:20px;border-radius:2px}
+
+/* ── KPIS WITH TOP BORDER ── */
+.kpi-card.kpi-green{border-top:2px solid var(--green)}
+.kpi-card.kpi-amber{border-top:2px solid var(--amber)}
+.kpi-card.kpi-violet{border-top:2px solid var(--violet)}
+
+/* ── INLINE SIGNAL ROW ── */
+.signal-row{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px 16px;margin-bottom:6px;
+  display:grid;grid-template-columns:9px 100px 160px 60px 1fr;
+  gap:12px;align-items:center;
+}
+
+/* ── ROADMAP DECISION GATE ── */
+.roadmap-item.gate{
+  border-color:var(--red-border);
+  background:var(--red-bg);
+}
+.roadmap-item.gate .roadmap-item-title{color:var(--red)}
+.roadmap-item.gate .roadmap-item-detail{color:var(--red);opacity:.8}
+
+/* ── MOBILE ── */
+@media(max-width:820px){
+  :root{--nav-w:0px}
+  #sidenav{transform:translateX(-228px);width:228px;transition:transform .25s;z-index:150}
+  #sidenav.open{transform:translateX(0)}
+  #nav-overlay.open{display:block}
+  #main{margin-left:0;padding:24px 18px 60px}
+  #menu-toggle{display:block}
+  #topbar .brand-zone{width:auto;min-width:auto;padding:0 16px}
+  #topbar .badge{display:none}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(2,1fr)}
+  .g2{grid-template-columns:1fr}
+  .scorecard-row{grid-template-columns:1fr 1fr;gap:8px}
+  .scorecard-header{display:none}
+  .engine-card{grid-template-columns:1fr 1fr;gap:10px}
+  .priority-item{grid-template-columns:32px 1fr;gap:12px}
+  .signal-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .g3,.g4{grid-template-columns:1fr}
+  .engine-card{grid-template-columns:1fr}
+  .signal-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header id="topbar">
+  <div class="brand-zone">
+    <div class="brand">Niche</div>
+  </div>
+  <div class="topbar-right">
+    <div class="subtitle">Executive Dashboard · NJ Cannabis</div>
+    <button id="menu-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+    <div class="badge">High Times Cup NJ 2026 · Swept Flower Podium</div>
+  </div>
+</header>
+
+<!-- NAV OVERLAY -->
+<div id="nav-overlay" onclick="toggleNav()"></div>
+
+<!-- LEFT NAV -->
+<nav id="sidenav">
+  <div class="nav-section-label">Core</div>
+  <button class="nav-item active" onclick="show('summary',this)"><span class="nav-dot"></span>Executive Summary</button>
+  <button class="nav-item" onclick="show('scorecard',this)"><span class="nav-dot"></span>Agency Scorecard</button>
+  <button class="nav-item" onclick="show('priorities',this)"><span class="nav-dot"></span>Top 5 Priorities</button>
+  <button class="nav-item" onclick="show('roadmap',this)"><span class="nav-dot"></span>90-Day Roadmap</button>
+  <div class="nav-section-label">Analysis</div>
+  <button class="nav-item" onclick="show('engine',this)"><span class="nav-dot"></span>Growth Engine</button>
+  <button class="nav-item" onclick="show('opps',this)"><span class="nav-dot"></span>Key Opportunities</button>
+  <button class="nav-item" onclick="show('risks',this)"><span class="nav-dot"></span>Key Risks</button>
+  <div class="nav-section-label">Accountability</div>
+  <button class="nav-item" onclick="show('value',this)"><span class="nav-dot"></span>Who Controls What</button>
+  <div class="nav-section-label">Reference</div>
+  <button class="nav-item" onclick="show('supporting',this)"><span class="nav-dot"></span>Supporting Analysis</button>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+<!-- ═══════════════════════════════════════════════════════ EXECUTIVE SUMMARY -->
+<section id="summary" class="section active">
+  <div class="eyebrow">Executive Summary</div>
+  <h1 class="page-title">State of the business</h1>
+  <p class="page-sub">Niche is a licensed NJ cannabis cultivator selling wholesale to dispensaries. No consumer purchase pays Niche directly — every dollar flows through a dispensary intermediary.</p>
+
+  <div class="g4" style="margin-bottom:20px">
+    <div class="stat-tile">
+      <div class="label">Business type</div>
+      <div class="stat-val" style="font-size:14px;line-height:1.3">Wholesale CPG</div>
+      <div class="stat-sub">B2B cultivator → dispensary only</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Revenue formula</div>
+      <div class="stat-val" style="font-size:12px;line-height:1.4">Accounts × Units × Reorders</div>
+      <div class="stat-sub">No DTC transaction exists</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Market position</div>
+      <div class="stat-val" style="font-size:14px;line-height:1.3">Premium craft flower</div>
+      <div class="stat-sub">Top-shelf NJ indoor — two brands</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Biggest asset (May 2026)</div>
+      <div class="stat-val" style="font-size:14px;line-height:1.3;color:var(--green)">HT Cup NJ — swept</div>
+      <div class="stat-sub">1st Sativa · 1st Hybrid · 2nd Indica · 2,500+ judges</div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="label" style="margin-bottom:10px">What drives growth</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);flex-shrink:0;padding-top:3px">01</span>
+          <div><div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:1px">Sell-through velocity</div><div style="font-size:11px;color:var(--text-3)">If product sits, reorders don't happen. The entire chain depends on this.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);flex-shrink:0;padding-top:3px">02</span>
+          <div><div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:1px">Reorder cadence</div><div style="font-size:11px;color:var(--text-3)">Target: 30 days. Currently inconsistent. A sales ops problem, not a marketing one.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);flex-shrink:0;padding-top:3px">03</span>
+          <div><div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:1px">Account count</div><div style="font-size:11px;color:var(--text-3)">More dispensaries = more sell-through surface. Still concentrated in Hudson County.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);flex-shrink:0;padding-top:3px">04</span>
+          <div><div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:1px">Consumer pull</div><div style="font-size:11px;color:var(--text-3)">Cup win is the most powerful pull signal in the brand's history.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);flex-shrink:0;padding-top:3px">05</span>
+          <div><div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:1px">Packaging throughput</div><div style="font-size:11px;color:var(--text-3)">Unpackaged backlog is a live revenue ceiling. Ops must clear it before demand arrives.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-accent lime">
+      <div class="label" style="margin-bottom:8px">Most important right now</div>
+      <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:10px">Niche swept the <strong>first-ever NJ High Times Cannabis Cup</strong> flower podium in May 2026. This is a perishable asset — the window to convert this win into brand recognition, dispensary adoption, and consumer pull is open now and narrows fast.</p>
+      <p style="font-size:12px;color:var(--text-3);margin-bottom:12px">Simultaneous constraint: operations must be able to fulfill the demand this recognition will generate. A win that creates orders ops cannot ship is worse than no win at all.</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <span class="tag tag-danger">Packaging backlog = revenue ceiling</span>
+        <span class="tag tag-lime">Cup win = 90-day window</span>
+        <span class="tag tag-amber">Goodies needs identity now</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-lime">
+    <strong style="color:var(--green)">Brand context: Niche vs. Goodies</strong> — Niche (premium/connoisseur) is the credibility anchor. Goodies (accessible/volume) is the revenue engine heading to 80% of production. Both are sold wholesale. Goodies is earlier stage with no established brand identity.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ AGENCY SCORECARD -->
+<section id="scorecard" class="section">
+  <div class="eyebrow">Agency Success Scorecard</div>
+  <h1 class="page-title">What we're trying to improve — and how we'll know</h1>
+  <p class="page-sub">Answers "Is Ecomm Cartel performing?" before discussing priorities. Three groups with explicit ownership and attribution.</p>
+
+  <!-- Group 1: Executive Business KPIs -->
+  <div style="margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <div style="width:3px;height:18px;background:var(--green);border-radius:2px"></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text)">Executive Business KPIs</div>
+    </div>
+    <p style="font-size:11px;color:var(--text-3);margin-bottom:10px;padding-left:13px">Leadership monitors these. Agency influence is low to none — these are business health metrics owned by sales and ops.</p>
+    <div class="ga" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="kpi-card" style="border-top:2px solid var(--green)">
+        <div class="kpi-name">Retail sell-through velocity</div>
+        <div class="kpi-why">If product sits, reorders don't happen. The highest-impact business metric.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: sales</span><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--green)">
+        <div class="kpi-name">Retailer reorder rate</div>
+        <div class="kpi-why">% of active accounts reordering monthly. Below 70% = retention problem.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: sales</span><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--green)">
+        <div class="kpi-name">Active dispensary accounts</div>
+        <div class="kpi-why">Ordered within 60 days. True distribution footprint — not accounts signed.</div>
+        <div class="kpi-tags"><span class="tag tag-dark">lagging</span><span class="tag tag-dark">owner: sales</span><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--green)">
+        <div class="kpi-name">Revenue per active account</div>
+        <div class="kpi-why">Rising = accounts ordering deeper. Falling = distribution outpacing order depth.</div>
+        <div class="kpi-tags"><span class="tag tag-dark">lagging</span><span class="tag tag-dark">owner: leadership</span><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--green)">
+        <div class="kpi-name">Distribution coverage</div>
+        <div class="kpi-why">Geographic concentration risk. Alert if Hudson County exceeds 70% of revenue.</div>
+        <div class="kpi-tags"><span class="tag tag-dark">lagging</span><span class="tag tag-dark">owner: leadership</span><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 2: Consumer Demand KPIs -->
+  <div style="margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <div style="width:3px;height:18px;background:var(--amber);border-radius:2px"></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text)">Consumer Demand KPIs</div>
+    </div>
+    <p style="font-size:11px;color:var(--text-3);margin-bottom:10px;padding-left:13px">Demand signals that precede sell-through. All are proxies — cannabis has no DTC transaction.</p>
+    <div class="ga" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="kpi-card" style="border-top:2px solid var(--amber)">
+        <div class="kpi-name">Brand search volume</div>
+        <div class="kpi-why">Consumer actively seeking Niche product. Best available demand proxy.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--amber)">
+        <div class="kpi-name">Weedmaps search volume</div>
+        <div class="kpi-why">In-platform demand signal. Only moves if awareness + distribution both exist.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--amber)">
+        <div class="kpi-name">Store locator clicks</div>
+        <div class="kpi-why">Intent signal — consumer trying to find product. Tracks campaign-to-consideration conversion.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--amber)">
+        <div class="kpi-name">Email subscriber growth</div>
+        <div class="kpi-why">Owned audience baseline: ~3,000. Quality (NJ-based, age-verified) matters more than volume.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--amber)">
+        <div class="kpi-name">Reddit / social mentions</div>
+        <div class="kpi-why">Organic community trust. How Clade9 earned default recommendation status. Niche starts near zero.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 3: Agency Performance KPIs -->
+  <div style="margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <div style="width:3px;height:18px;background:var(--purple);border-radius:2px"></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text)">Agency Performance KPIs</div>
+    </div>
+    <p style="font-size:11px;color:var(--text-3);margin-bottom:10px;padding-left:13px">What Ecomm Cartel is directly accountable for. All are leading indicators — not revenue.</p>
+    <div class="ga" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="kpi-card" style="border-top:2px solid var(--purple)">
+        <div class="kpi-name">Email engagement rate</div>
+        <div class="kpi-why">Target: 25%+ open / 4%+ CTR on strain drops. Baseline unknown — establish in Phase 1.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--purple)">
+        <div class="kpi-name">Social engagement quality</div>
+        <div class="kpi-why">Saves + shares, not followers. Saves = purchase research. Shares = organic amplification.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--purple)">
+        <div class="kpi-name">Cup win earned reach</div>
+        <div class="kpi-why">Time-sensitive. Track coverage volume and decay. Alert if reach stalls by day 45.</div>
+        <div class="kpi-tags"><span class="tag tag-danger">90-day window</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--purple)">
+        <div class="kpi-name">Geo-spike sell-through lift</div>
+        <div class="kpi-why">Only available marketing attribution proxy in cannabis. Validates or invalidates media spend.</div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-muted">shared: sales + ops</span><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div></div>
+      </div>
+      <div class="kpi-card" style="border-top:2px solid var(--purple)">
+        <div class="kpi-name">Reporting coverage</div>
+        <div class="kpi-why">Are all channels reported accurately and on time? Missing data = inability to make decisions.</div>
+        <div class="kpi-tags"><span class="tag tag-dark">lagging</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-accent teal">
+    <div class="label" style="margin-bottom:6px">90-day agency review criteria</div>
+    <p style="font-size:12px;color:var(--text-3);line-height:1.65">At day 90, the retain/adjust/expand decision is based on leading indicators only: email growing, cup win in wide circulation, Reddit mentions rising, geo-spike test showing sell-through lift. <strong style="color:var(--text)">Revenue is not a valid 90-day agency metric.</strong> It is a 6–12 month lagging signal.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRIORITIES -->
+<section id="priorities" class="section">
+  <div class="eyebrow">Strategic Priorities</div>
+  <h1 class="page-title">Top 5 priorities</h1>
+  <p class="page-sub">Ranked by business impact and urgency. Every priority ties directly to revenue, sell-through, reorders, or distribution.</p>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+
+    <div class="priority-item" style="border-left:3px solid var(--danger)">
+      <div class="priority-num" style="color:var(--danger)">01</div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Convert the High Times Cup win into market position</div>
+        <div class="priority-tags"><span class="tag tag-danger">Critical</span><span class="tag tag-danger">Immediate</span><span class="tag tag-purple">CEO + Agency</span></div>
+        <div class="priority-why">First-ever NJ cup. Niche swept the flower podium. No other NJ craft brand holds this credential today. This win is worth more in the next 90 days than in the next 12 months — every B2B touchpoint, email, social post, and budtender training asset must be built around it now.</div>
+        <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Consumer awareness</span><span class="tag tag-lime">Retail adoption</span><span class="tag tag-lime">Inbound leads</span></div>
+      </div>
+    </div>
+
+    <div class="priority-item" style="border-left:3px solid var(--danger)">
+      <div class="priority-num" style="color:var(--danger)">02</div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Clear the packaging backlog</div>
+        <div class="priority-tags"><span class="tag tag-danger">Critical</span><span class="tag tag-danger">Immediate</span><span class="tag tag-purple">Operations</span></div>
+        <div class="priority-why">Unpackaged flower is a hard revenue ceiling. No campaign can generate revenue from product that cannot ship. If awareness drives inbound demand and ops cannot fulfill, the brand loses its most valuable window at exactly the wrong moment.</div>
+        <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Revenue</span><span class="tag tag-lime">Reorders</span><span class="tag tag-lime">Fulfillment</span></div>
+      </div>
+    </div>
+
+    <div class="priority-item" style="border-left:3px solid var(--amber)">
+      <div class="priority-num" style="color:var(--amber)">03</div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Systematize the 30-day reorder cadence</div>
+        <div class="priority-tags"><span class="tag tag-amber">High</span><span class="tag tag-amber">This quarter</span><span class="tag tag-purple">Sales</span></div>
+        <div class="priority-why">Reorders are managed manually by one person. No CRM, no SOP, no backup. If the sales lead is unavailable, active accounts go unchecked and revenue stops. This is the most fragile structural point in the revenue cycle.</div>
+        <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Revenue</span><span class="tag tag-lime">Reorders</span><span class="tag tag-lime">Account retention</span></div>
+      </div>
+    </div>
+
+    <div class="priority-item" style="border-left:3px solid var(--amber)">
+      <div class="priority-num" style="color:var(--amber)">04</div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Define Goodies brand identity and expand distribution</div>
+        <div class="priority-tags"><span class="tag tag-amber">High</span><span class="tag tag-amber">This quarter</span><span class="tag tag-purple">CEO + Agency + Sales</span></div>
+        <div class="priority-why">Production is moving to 80% Goodies. Without a defined brand identity and dispensary penetration in South and Central NJ, the volume engine has no pull. This is a CEO-level decision that cannot be delegated to the agency.</div>
+        <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Revenue</span><span class="tag tag-lime">Distribution</span><span class="tag tag-lime">Account volume</span></div>
+      </div>
+    </div>
+
+    <div class="priority-item" style="border-left:3px solid var(--teal)">
+      <div class="priority-num" style="color:var(--teal)">05</div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Validate geo-spike methodology before scaling paid media</div>
+        <div class="priority-tags"><span class="tag tag-teal">High</span><span class="tag tag-teal">This quarter</span><span class="tag tag-purple">Agency + Sales</span></div>
+        <div class="priority-why">Cannabis has no pixel-level attribution. Geo-spike is the only available proxy — run targeted ads near specific dispensaries, measure sell-through lift vs. controls. Scaling media spend without a validated test means spending against signals that cannot be verified.</div>
+        <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Measurement</span><span class="tag tag-lime">Media efficiency</span><span class="tag tag-lime">Attribution</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ ROADMAP -->
+<section id="roadmap" class="section">
+  <div class="eyebrow">90-Day Roadmap</div>
+  <h1 class="page-title">Executive execution plan</h1>
+  <p class="page-sub">Every initiative ties to revenue, sell-through, reorders, or distribution. Phase 2 has a hard decision gate — no media scale without validated geo-spike lift.</p>
+
+  <!-- Phase 1 -->
+  <div style="margin-bottom:28px">
+    <div class="phase-header">
+      <div class="phase-stripe" style="background:var(--green);height:56px"></div>
+      <div>
+        <div style="display:flex;gap:6px;margin-bottom:4px"><span class="tag tag-lime">Phase 1</span><span class="tag tag-dark">Days 1–30</span></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text)">Foundation & activation</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Fix ops. Set baselines. Activate the cup win.</div>
+      </div>
+    </div>
+    <div style="padding-left:15px">
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Establish sell-through baselines at all active accounts</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Sales</span><span class="tag tag-lime">Sell-through</span></div></div>
+        <div class="roadmap-item-detail">Pull Hoodie data for every active account. Capture units/day sell rate. This is the control group for all geo-spike tests — without baselines, no campaign result can be validated.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Resolve packaging backlog — set weekly packaged-units target</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Operations</span><span class="tag tag-lime">Revenue</span></div></div>
+        <div class="roadmap-item-detail">Set a specific packaged-units-per-week target and hold ops to it. Marketing campaigns are wasted if accounts cannot be fulfilled.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Launch cup win campaign across all channels</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency</span><span class="tag tag-lime">Awareness</span></div></div>
+        <div class="roadmap-item-detail">Every email, social post, and B2B touchpoint references the NJ cup sweep. First 30 days post-win are the highest-value amplification window.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Define Goodies brand pillars and visual identity</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO + Agency</span><span class="tag tag-lime">Distribution</span></div></div>
+        <div class="roadmap-item-detail">CEO-level decision — not delegatable. Goodies heads to 80% of production; identity must be locked before distribution scales.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Select 3–5 geo-spike test accounts with Hoodie coverage</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Sales + Agency</span><span class="tag tag-lime">Measurement</span></div></div>
+        <div class="roadmap-item-detail">Identify accounts with reliable sell-through data. Baselines accrue over 30 days before any media runs.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div style="margin-bottom:28px">
+    <div class="phase-header">
+      <div class="phase-stripe" style="background:var(--amber);height:56px"></div>
+      <div>
+        <div style="display:flex;gap:6px;margin-bottom:4px"><span class="tag tag-amber">Phase 2</span><span class="tag tag-dark">Days 31–60</span></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text)">Campaign execution & geo-spike test</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Run first geo-spike. Launch Goodies. Drive reorder cadence.</div>
+      </div>
+    </div>
+    <div style="padding-left:15px">
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Execute geo-spike test — first paid media strain drop</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency + Sales + Ops</span><span class="tag tag-amber">Sell-through</span></div></div>
+        <div class="roadmap-item-detail">Run paid media around test accounts during a Niche drop. Require: stock confirmed, baselines captured. Measure sell-through lift vs. controls for 21 days post-launch.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Launch Goodies in 10+ new dispensary accounts</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Sales</span><span class="tag tag-amber">Distribution</span></div></div>
+        <div class="roadmap-item-detail">Target South and Central NJ accounts. Goodies is the lower-friction pitch — accessible price point, fun brand, volume play.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Implement formal 30-day reorder cadence SOP</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Sales</span><span class="tag tag-amber">Reorders</span></div></div>
+        <div class="roadmap-item-detail">Every active account gets a check-in at day 22–25 of their order cycle. Must be a documented SOP, not a personal calendar reminder.</div>
+      </div>
+      <div class="roadmap-item gate">
+        <div class="roadmap-item-header"><span class="roadmap-item-title" style="color:var(--red)">⚑ Decision gate: evaluate geo-spike results at day 30</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO</span><span class="tag tag-danger">Gate</span></div></div>
+        <div class="roadmap-item-detail">Pull sell-through lift from test accounts vs. controls. If validated: scale media. If not: diagnose which variable failed before spending more.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Activate B2B email for non-carrying dispensary buyers</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency</span><span class="tag tag-amber">Retail adoption</span></div></div>
+        <div class="roadmap-item-detail">Cup win + brand story deployed as a B2B conversion sequence to dispensary buyers who haven't yet committed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div>
+    <div class="phase-header">
+      <div class="phase-stripe" style="background:var(--teal);height:56px"></div>
+      <div>
+        <div style="display:flex;gap:6px;margin-bottom:4px"><span class="tag tag-teal">Phase 3</span><span class="tag tag-dark">Days 61–90</span></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text)">Scale & review</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Scale validated channels. Review agency performance. Set Q2 targets.</div>
+      </div>
+    </div>
+    <div style="padding-left:15px">
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Scale geo-spike media if Phase 2 validated</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency</span><span class="tag tag-teal">Sell-through</span></div></div>
+        <div class="roadmap-item-detail">Expand geo-targeting to all active accounts with confirmed stock. Scale the model, not just the budget.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Review Goodies distribution progress — adjust if needed</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO + Sales</span><span class="tag tag-teal">Distribution</span></div></div>
+        <div class="roadmap-item-detail">Use Phase 2 data to refine the Goodies pitch, adjust SKU mix, and determine whether the 80/20 production target is achievable on schedule.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">90-day agency review against scorecard metrics</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO</span><span class="tag tag-teal">Agency ROI</span></div></div>
+        <div class="roadmap-item-detail">Review email growth, cup win reach, Reddit mentions, geo-spike lift. Revenue is not a valid 90-day metric. Retain/adjust/expand decision is based on leading indicators only.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Build Q2 strain drop calendar — tri-party coordination</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Ops + Sales + Agency</span><span class="tag tag-teal">Revenue</span></div></div>
+        <div class="roadmap-item-detail">Agency needs 2–3 weeks lead time. Ops commits a packaging-complete date. Sales pre-books orders. Formal release calendar with hard dates, not a rolling conversation.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Set formal Q2 targets based on real data</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO</span><span class="tag tag-teal">All drivers</span></div></div>
+        <div class="roadmap-item-detail">Account count targets (Niche + Goodies), reorder cadence targets, email benchmarks, geo-spike ROI threshold. Set with real data now, not projections.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ GROWTH ENGINE -->
+<section id="engine" class="section">
+  <div class="eyebrow">Growth Engine</div>
+  <h1 class="page-title">Revenue chain — stage by stage</h1>
+  <p class="page-sub">The chain breaks if any stage is under-resourced. Agency influence is explicitly rated at every stage.</p>
+
+  <div style="display:flex;flex-direction:column">
+
+    <div class="engine-stage">
+      <div class="engine-line-col"><div class="engine-dot" style="background:var(--text-3)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
+      <div><div class="engine-card" style="border-left:3px solid var(--text-3)">
+        <div><div class="engine-stage-name" style="color:var(--text-3)">Cultivation</div><div class="engine-detail">Elite genetics, indoor hand-trim. Nothing downstream works if this cannot ship.</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Operations</div><div style="font-size:11px;color:var(--text-3)">Packaged units / week</div></div>
+        <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Backlog constraint</div></div>
+        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="engine-stage">
+      <div class="engine-line-col"><div class="engine-dot" style="background:var(--teal)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
+      <div><div class="engine-card" style="border-left:3px solid var(--teal)">
+        <div><div class="engine-stage-name" style="color:var(--teal)">Distribution</div><div class="engine-detail">Licensed distributor delivers to dispensaries. Account count determines sell-through surface area.</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Ops + Sales</div><div style="font-size:11px;color:var(--text-3)">Active accounts</div></div>
+        <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Geographic concentration</div></div>
+        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="engine-stage">
+      <div class="engine-line-col"><div class="engine-dot" style="background:var(--teal)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
+      <div><div class="engine-card" style="border-left:3px solid var(--teal)">
+        <div><div class="engine-stage-name" style="color:var(--teal)">Retail adoption</div><div class="engine-detail">Dispensary buyer says yes. Driven by sales relationships, cup win, and prior reputation.</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Sales team</div><div style="font-size:11px;color:var(--text-3)">New accounts / month</div></div>
+        <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Single-rep dependency</div></div>
+        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">B2B email, brand credibility</div></div>
+      </div></div>
+    </div>
+
+    <div class="engine-stage">
+      <div class="engine-line-col"><div class="engine-dot" style="background:var(--amber)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
+      <div><div class="engine-card" style="border-left:3px solid var(--amber)">
+        <div><div class="engine-stage-name" style="color:var(--amber)">Consumer demand</div><div class="engine-detail">Consumer pull — someone walking in asking for Niche by name. Currently weak outside Hudson.</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Agency + Brand</div><div style="font-size:11px;color:var(--text-3)">Weedmaps impressions / email CTR</div></div>
+        <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Cup win window perishable</div></div>
+        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Social, email, geo ads</div></div>
+      </div></div>
+    </div>
+
+    <div class="engine-stage">
+      <div class="engine-line-col"><div class="engine-dot" style="background:var(--amber)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
+      <div><div class="engine-card" style="border-left:3px solid var(--amber)">
+        <div><div class="engine-stage-name" style="color:var(--amber)">Sell-through</div><div class="engine-detail">Product moving off the shelf. The highest-impact business metric. All other work exists to accelerate this.</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Sales + Agency</div><div style="font-size:11px;color:var(--text-3)">Units / day per account</div></div>
+        <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Budtender knowledge gap</div></div>
+        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Geo-spike, B2B education</div></div>
+      </div></div>
+    </div>
+
+    <div class="engine-stage">
+      <div class="engine-line-col"><div class="engine-dot" style="background:var(--green)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
+      <div><div class="engine-card" style="border-left:3px solid var(--green)">
+        <div><div class="engine-stage-name" style="color:var(--green)">Reorders</div><div class="engine-detail">Dispensary buyer calls back. Target: 30 days. Currently inconsistent. A sales operations problem.</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Sales team</div><div style="font-size:11px;color:var(--text-3)">Days between orders</div></div>
+        <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">No CRM or SOP</div></div>
+        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Only via sell-through lift</div></div>
+      </div></div>
+    </div>
+
+    <div class="engine-stage">
+      <div class="engine-line-col"><div class="engine-dot" style="background:var(--green)"></div></div>
+      <div><div class="engine-card" style="border-left:3px solid var(--green);margin-bottom:0">
+        <div><div class="engine-stage-name" style="color:var(--green)">Revenue</div><div class="engine-detail">Accounts × order size × reorder frequency. A 6–12 month signal from marketing inputs.</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Leadership</div><div style="font-size:11px;color:var(--text-3)">Wholesale $ / month</div></div>
+        <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">All upstream risks compound</div></div>
+        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Not a 90-day agency metric</div></div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ OPPORTUNITIES -->
+<section id="opps" class="section">
+  <div class="eyebrow">Growth Opportunities</div>
+  <h1 class="page-title">Top 5 opportunities — next 12 months</h1>
+  <p class="page-sub">Ranked by business impact and readiness to execute.</p>
+
+  <div class="opp-item" style="border-left:3px solid var(--green)">
+    <div class="opp-header"><span class="opp-num" style="color:var(--green)">01</span><div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Cup win conversion window</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag tag-lime">0–90 days</span><span class="tag tag-dark">brand authority → retail adoption → revenue</span></div></div></div>
+    <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">Niche swept NJ's first-ever High Times Cannabis Cup. No other NJ craft brand holds this now. Brands that own category awards dominate budtender default recommendations — this is how Clade9 became the "safe bet." The window is perishable.</p>
+    <div class="opp-outcome"><strong style="color:var(--green);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:'DM Mono',monospace">Expected outcome → </strong>Inbound dispensary inquiries, sell-through lift at existing accounts, new account openings outside Hudson County.</div>
+  </div>
+
+  <div class="opp-item" style="border-left:3px solid var(--amber)">
+    <div class="opp-header"><span class="opp-num" style="color:var(--amber)">02</span><div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Goodies — accessible brand at scale</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag tag-amber">90 days–6 months</span><span class="tag tag-dark">distribution → revenue</span></div></div></div>
+    <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">No dominant independent brand owns the $45–55/eighth accessible lane. Jersey Strong competes on price alone. Goodies with real identity occupies the gap between commodity discount and premium connoisseur shelf — a lane that is currently unclaimed.</p>
+    <div class="opp-outcome"><strong style="color:var(--amber);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:'DM Mono',monospace">Expected outcome → </strong>New accounts in South and Central NJ, higher order volumes, revenue growth proportional to 80/20 production shift.</div>
+  </div>
+
+  <div class="opp-item" style="border-left:3px solid var(--teal)">
+    <div class="opp-header"><span class="opp-num" style="color:var(--teal)">03</span><div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Consumer pull infrastructure — owned audience</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag tag-teal">60–180 days</span><span class="tag tag-dark">consumer demand → sell-through</span></div></div></div>
+    <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">Niche has 3,000 B2C emails and no Reddit presence. Clade9 became the default recommendation through organic community trust. The brand that builds a direct NJ consumer channel — email list, Reddit presence, strain drop cadence — owns the demand signal currently stuck inside dispensary walls.</p>
+    <div class="opp-outcome"><strong style="color:var(--teal);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:'DM Mono',monospace">Expected outcome → </strong>Sell-through lift at email-directed dispensaries, growing Weedmaps search volume, faster sell-through on new drops.</div>
+  </div>
+
+  <div class="opp-item" style="border-left:3px solid var(--purple)">
+    <div class="opp-header"><span class="opp-num" style="color:var(--violet)">04</span><div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">North Jersey regional dominance</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag tag-purple">6–12 months</span><span class="tag tag-dark">brand identity → defensibility</span></div></div></div>
+    <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">Niche is North Bergen. Garden Greens is South Jersey. Clade9 has no NJ geographic identity. Hudson, Bergen, Essex, and Passaic counties are the most populous, most NY-adjacent markets in the state. Nobody has claimed this regional brand position.</p>
+    <div class="opp-outcome"><strong style="color:var(--violet);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:'DM Mono',monospace">Expected outcome → </strong>Higher dispensary penetration in target counties, stronger budtender familiarity, platform for southward expansion.</div>
+  </div>
+
+  <div class="opp-item" style="border-left:3px solid var(--danger)">
+    <div class="opp-header"><span class="opp-num" style="color:var(--danger)">05</span><div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Dispensary co-op marketing model</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag tag-danger">90–180 days</span><span class="tag tag-dark">retailer adoption → sell-through</span></div></div></div>
+    <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">The Winner's Circle campaign proved dispensaries respond to being featured in brand marketing. Systematized, carrying Niche means the dispensary gets marketed to Niche's email list. No other NJ craft cultivator has built this — it creates a structural incentive to carry Niche over a competitor.</p>
+    <div class="opp-outcome"><strong style="color:var(--danger);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:'DM Mono',monospace">Expected outcome → </strong>Higher dispensary retention, reduced price-sensitivity in wholesale, new account conversion lift.</div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ RISKS -->
+<section id="risks" class="section">
+  <div class="eyebrow">Risk Analysis</div>
+  <h1 class="page-title">Top 5 risks</h1>
+  <p class="page-sub">Each risk includes an early warning signal and a monitoring threshold.</p>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+
+    <div class="card-accent danger">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span class="tag tag-dark">Operational</span><span class="tag tag-danger">Critical severity</span><span class="tag tag-amber">High likelihood</span></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Packaging backlog caps revenue ceiling</div>
+      <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">Unpackaged flower cannot ship. Marketing that drives demand into an ops bottleneck is wasted capital. Risk is highest in the 30–60 days following cup win campaign launch.</p>
+      <div style="background:var(--bg);border-radius:6px;padding:8px 12px;border:1px solid var(--border)"><span style="font-size:9px;color:var(--danger);font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase">Alert → </span><span style="font-size:11px;color:var(--text-3)">Available packaged inventory falls below 2 weeks of current order fill rate.</span></div>
+    </div>
+
+    <div class="card-accent amber">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span class="tag tag-dark">Sales</span><span class="tag tag-amber">High severity</span><span class="tag tag-muted">Medium likelihood</span></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Single-person reorder dependency</div>
+      <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">Reorder cadence is managed personally by the sales lead. No CRM, no SOP, no backup. If the sales lead is unavailable, active accounts go unchecked and revenue stalls.</p>
+      <div style="background:var(--bg);border-radius:6px;padding:8px 12px;border:1px solid var(--border)"><span style="font-size:9px;color:var(--amber);font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase">Alert → </span><span style="font-size:11px;color:var(--text-3)">Any active account exceeds 35 days without a sales touchpoint.</span></div>
+    </div>
+
+    <div class="card-accent purple">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span class="tag tag-dark">Brand</span><span class="tag tag-amber">High severity</span><span class="tag tag-muted">Medium likelihood</span></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Cup win window closes without amplification</div>
+      <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">The NJ cup sweep is perishable. If 6 months pass and NJ cannabis culture doesn't broadly associate Niche with this win, the competitive advantage decays to zero and competitors will win future cups.</p>
+      <div style="background:var(--bg);border-radius:6px;padding:8px 12px;border:1px solid var(--border)"><span style="font-size:9px;color:var(--violet);font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase">Alert → </span><span style="font-size:11px;color:var(--text-3)">Reddit + social mention count fails to show growth by day 45 post-launch.</span></div>
+    </div>
+
+    <div class="card-accent teal">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span class="tag tag-dark">Distribution</span><span class="tag tag-muted">Medium severity</span><span class="tag tag-muted">Medium likelihood</span></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Hudson County revenue concentration</div>
+      <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">Geographic concentration creates single-market risk. A regulatory change or strong regional competitor could disproportionately impact revenue. Goodies expansion to South/Central NJ is the natural diversification mechanism.</p>
+      <div style="background:var(--bg);border-radius:6px;padding:8px 12px;border:1px solid var(--border)"><span style="font-size:9px;color:var(--teal);font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase">Alert → </span><span style="font-size:11px;color:var(--text-3)">Hudson County exceeds 70% of total revenue for two consecutive months.</span></div>
+    </div>
+
+    <div class="card-accent blue">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span class="tag tag-dark">Marketing</span><span class="tag tag-muted">Medium severity</span><span class="tag tag-amber">High likelihood</span></div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Media spend without attribution validation</div>
+      <p style="font-size:12px;color:var(--text-3);line-height:1.65;margin-bottom:8px">Geo-spike has not been validated for Niche. Scaling paid media before the test produces data means spending against signals that cannot be proven to move sell-through. Capital efficiency risk.</p>
+      <div style="background:var(--bg);border-radius:6px;padding:8px 12px;border:1px solid var(--border)"><span style="font-size:9px;color:var(--blue);font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase">Gate → </span><span style="font-size:11px;color:var(--text-3)">Do not scale paid media until at least one geo-spike test shows measurable sell-through lift.</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ WHO CONTROLS WHAT -->
+<section id="value" class="section">
+  <div class="eyebrow">Accountability Map</div>
+  <h1 class="page-title">How Ecomm Cartel creates value</h1>
+  <p class="page-sub">The clearest source of misaligned expectations is misattributed outcomes. This map defines what each party controls — and cannot be held responsible for.</p>
+
+  <div class="alert alert-lime" style="margin-bottom:20px">
+    <strong style="color:var(--green)">The structural reality: </strong>Ecomm Cartel creates consumer demand that must pass through a dispensary to become revenue. There is no pixel on a dispensary transaction. Every agency metric is a leading indicator. Revenue is a 6–12 month lagging signal — not a 90-day agency accountability metric.
+  </div>
+
+  <div class="g2">
+
+    <div class="zone-card" style="border-left:3px solid var(--green)">
+      <div class="zone-header"><span class="zone-icon" style="color:var(--green)">◎</span><span class="zone-title" style="color:var(--green)">Ecomm Cartel</span></div>
+      <ul class="zone-list">
+        <li>Social content creation and posting cadence (Niche + Goodies)</li>
+        <li>Paid media — Meta, Google, CTV, OOH strategy and execution</li>
+        <li>Geo-spike campaign design and sell-through proxy reporting</li>
+        <li>Email platform, segmentation, flows, and newsletters</li>
+        <li>Social listening — Reddit, X, Instagram keyword monitoring</li>
+        <li>B2C and B2B email automation and community response</li>
+        <li>Brand voice, content direction, and creative quality</li>
+        <li>Dispensary spotlight campaigns within email</li>
+        <li>All channel-level performance reporting</li>
+      </ul>
+      <div class="zone-cant">
+        <div class="zone-cant-label">Cannot control</div>
+        <ul class="zone-list zone-cant">
+          <li>Cannot open dispensary accounts</li>
+          <li>Cannot fulfill a wholesale order</li>
+          <li>Cannot guarantee sell-through at retail</li>
+          <li>Cannot close the attribution loop — no DTC transaction exists</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="zone-card" style="border-left:3px solid var(--amber)">
+      <div class="zone-header"><span class="zone-icon" style="color:var(--amber)">◈</span><span class="zone-title" style="color:var(--amber)">Sales Team</span></div>
+      <ul class="zone-list">
+        <li>New account prospecting and onboarding</li>
+        <li>Wholesale relationship management with dispensary buyers</li>
+        <li>Reorder follow-up and 30-day cadence execution</li>
+        <li>Right-sizing orders to achieve sell-through targets</li>
+        <li>Budtender training and account-level education</li>
+        <li>Sell-through monitoring via Hoodie</li>
+        <li>Account prioritization for limited drops</li>
+        <li>Retailer partnership terms and co-op decisions</li>
+      </ul>
+      <div class="zone-cant">
+        <div class="zone-cant-label">Cannot control</div>
+        <ul class="zone-list zone-cant">
+          <li>Cannot create consumer pull without brand support</li>
+          <li>Cannot ship unpackaged product (ops dependency)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="zone-card" style="border-left:3px solid var(--teal)">
+      <div class="zone-header"><span class="zone-icon" style="color:var(--teal)">⚙</span><span class="zone-title" style="color:var(--teal)">Operations</span></div>
+      <ul class="zone-list">
+        <li>Cultivation quality, consistency, and yield per harvest</li>
+        <li>Post-harvest: drying, curing, and hand-trim SOP</li>
+        <li>Packaging throughput — clearing the backlog</li>
+        <li>Strain availability at any given time</li>
+        <li>Production split: Niche vs. Goodies (target: 80/20)</li>
+        <li>CRC compliance</li>
+        <li>Fulfillment reliability — preventing stock-outs</li>
+        <li>Content access for the agency (facility, product shots)</li>
+      </ul>
+      <div class="zone-cant">
+        <div class="zone-cant-label">Cannot control</div>
+        <ul class="zone-list zone-cant">
+          <li>Cannot create consumer demand for product on shelf</li>
+          <li>Cannot control reorder timing once product ships</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="zone-card" style="border-left:3px solid var(--purple)">
+      <div class="zone-header"><span class="zone-icon" style="color:var(--violet)">◉</span><span class="zone-title" style="color:var(--violet)">Leadership</span></div>
+      <ul class="zone-list">
+        <li>Brand positioning for Niche and Goodies</li>
+        <li>Wholesale pricing and margin strategy</li>
+        <li>Market entry decisions and geographic expansion</li>
+        <li>Product line: strains, SKUs, limited drops</li>
+        <li>Genetics sourcing and cultivar partnerships</li>
+        <li>Budget allocation between brands and agency</li>
+        <li>Agency scope, retention, and performance decisions</li>
+        <li>Investor relations and capital allocation</li>
+      </ul>
+      <div class="zone-cant">
+        <div class="zone-cant-label">Cannot control</div>
+        <ul class="zone-list zone-cant">
+          <li>Cannot substitute for sales execution or ops throughput</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ SUPPORTING -->
+<section id="supporting" class="section">
+  <div class="eyebrow">Supporting Analysis</div>
+  <h1 class="page-title">Reference material</h1>
+  <p class="page-sub">Supporting research that informs the executive decisions above. Expand each panel individually.</p>
+
+  <div class="collapse-item">
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div><div class="collapse-trigger-title">Business Model Analysis</div><div class="collapse-trigger-sub">Revenue mechanics, wholesale structure, and growth driver hierarchy.</div></div>
+      <span class="collapse-arrow">▾</span>
+    </button>
+    <div class="collapse-body">
+      <div class="alert alert-lime" style="margin-bottom:12px"><strong style="color:var(--green)">Revenue formula: </strong>Active accounts × Order size × Reorder frequency = Wholesale revenue. No DTC transaction. Niche is paid by dispensaries, not consumers.</div>
+      <div class="g2">
+        <div class="card"><div class="label" style="margin-bottom:6px">Niche brand</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Connoisseur/top-shelf. Lower volume, higher margin per unit. Credibility anchor for the entire operation. Wins awards, attracts press, signals quality. ~20% of production (target).</p></div>
+        <div class="card"><div class="label" style="margin-bottom:6px">Goodies brand</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Accessible/social. Higher volume, lower margin per unit. Volume engine. Absorbs 80% of cultivation output. Revenue engine at scale. Earlier stage — no established identity yet.</p></div>
+        <div class="card"><div class="label" style="margin-bottom:6px">Consumer demand reality</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">All consumer demand filters through dispensaries. Agency creates conditions but cannot complete the transaction. Every marketing dollar must travel through an intermediary before converting to revenue.</p></div>
+        <div class="card"><div class="label" style="margin-bottom:6px">Distribution risk</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Hudson County concentration is a live risk. Goodies expansion to South/Central NJ is the natural diversification. Revenue geography should be tracked monthly.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse-item">
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div><div class="collapse-trigger-title">Competitive Landscape</div><div class="collapse-trigger-sub">Brand positioning, true competitors, white space, and market crowding.</div></div>
+      <span class="collapse-arrow">▾</span>
+    </button>
+    <div class="collapse-body">
+      <div class="g3" style="margin-bottom:12px">
+        <div class="card" style="border-top:2px solid var(--danger)">
+          <div class="label" style="margin-bottom:6px">True competitors</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-size:11px;color:var(--text)">Clade9 — "safe bet," statewide</div>
+            <div style="font-size:11px;color:var(--text)">Full Tilt Labs — 80+ dispensaries</div>
+            <div style="font-size:11px;color:var(--text)">Garden Greens (Test Kitchen)</div>
+            <div style="font-size:11px;color:var(--text)">Hamilton Farms — living soil</div>
+            <div style="font-size:11px;color:var(--text)">Victory Natural Farms</div>
+          </div>
+        </div>
+        <div class="card" style="border-top:2px solid var(--text-3)">
+          <div class="label" style="margin-bottom:6px">Not competitors</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-size:11px;color:var(--text-3)">Rythm — MSO consistency play</div>
+            <div style="font-size:11px;color:var(--text-3)">Jersey Strong — price brand</div>
+            <div style="font-size:11px;color:var(--text-3)">Verano / Curaleaf — MSO volume</div>
+            <div style="font-size:11px;color:var(--text-3)">Prolific — different cultural lane</div>
+          </div>
+        </div>
+        <div class="card" style="border-top:2px solid var(--green)">
+          <div class="label" style="margin-bottom:6px">Niche differentiators</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-size:11px;color:var(--green)">High Times Cup NJ 2026 — swept</div>
+            <div style="font-size:11px;color:var(--text)">Exclusive genetics (Josh D, others)</div>
+            <div style="font-size:11px;color:var(--text)">North Bergen urban NJ origin</div>
+            <div style="font-size:11px;color:var(--text)">Hand-trimmed, limited-batch</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:8px">Budtender default recommendation today — if asked "what's the best flower?"</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--text-3)">1. Clade9</div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--text-3)">2. Garden Greens (Test Kitchen)</div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--text-3)">3. Full Tilt Labs</div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--text-3)">4. Victory Natural Farms</div>
+          <div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--green)">5. Niche (if Hudson area)</div>
+        </div>
+        <p style="font-size:11px;color:var(--text-3);margin-top:8px;line-height:1.6">Cup win + broader distribution + budtender education shifts Niche to position 1 statewide.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse-item">
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div><div class="collapse-trigger-title">Agency Influence Analysis</div><div class="collapse-trigger-sub">What the agency can and cannot move at each stage of the revenue chain.</div></div>
+      <span class="collapse-arrow">▾</span>
+    </button>
+    <div class="collapse-body">
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;padding:4px 14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);:'DM Mono',monospace">
+          <span></span><span>Driver</span><span>Level</span><span>Type</span><span>Why</span>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--green)"></div>
+          <span style="font-size:11px;color:var(--text)">Consumer awareness</span>
+          <div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">High</span></div>
+          <span class="tag tag-amber" style="font-size:8px">Leading</span>
+          <span style="font-size:11px;color:var(--text-3)">Social, paid media, email, listening — all directly owned.</span>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div>
+          <span style="font-size:11px;color:var(--text)">Consumer demand</span>
+          <div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">Medium</span></div>
+          <span class="tag tag-amber" style="font-size:8px">Leading</span>
+          <span style="font-size:11px;color:var(--text-3)">Agency creates conditions; dispensaries complete the transaction.</span>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--border-strong)"></div>
+          <span style="font-size:11px;color:var(--text)">Retail adoption</span>
+          <div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">Low</span></div>
+          <span class="tag tag-dark" style="font-size:8px">Lagging</span>
+          <span style="font-size:11px;color:var(--text-3)">B2B sales decision driven by sales team relationships.</span>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div>
+          <span style="font-size:11px;color:var(--text)">Sell-through</span>
+          <div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">Medium</span></div>
+          <span class="tag tag-amber" style="font-size:8px">Leading</span>
+          <span style="font-size:11px;color:var(--text-3)">Geo-spike + B2B email education influence velocity.</span>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--border-strong)"></div>
+          <span style="font-size:11px;color:var(--text)">Reorders</span>
+          <div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">Low</span></div>
+          <span class="tag tag-dark" style="font-size:8px">Lagging</span>
+          <span style="font-size:11px;color:var(--text-3)">Output of sell-through + sales follow-up. Agency has no direct lever.</span>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--green)"></div>
+          <span style="font-size:11px;color:var(--text)">Measurement</span>
+          <div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">High</span></div>
+          <span class="tag tag-amber" style="font-size:8px">Leading</span>
+          <span style="font-size:11px;color:var(--text-3)">Agency owns all channel-level reporting infrastructure.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse-item">
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div><div class="collapse-trigger-title">Market Analysis</div><div class="collapse-trigger-sub">NJ cannabis market context and the craft correction.</div></div>
+      <span class="collapse-arrow">▾</span>
+    </button>
+    <div class="collapse-body">
+      <div class="g3" style="margin-bottom:12px">
+        <div class="stat-tile"><div class="label">NJ sales 2024</div><div class="stat-val">$1B+</div><div class="stat-sub">25% YoY growth</div></div>
+        <div class="stat-tile"><div class="label">Licensed dispensaries</div><div class="stat-val">220+</div><div class="stat-sub">Active statewide</div></div>
+        <div class="stat-tile"><div class="label">Projected market 2026</div><div class="stat-val">$2.4B</div><div class="stat-sub">Per industry projections</div></div>
+      </div>
+      <div class="card"><div class="label" style="margin-bottom:6px">The craft correction (2024–2025)</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Independent cultivation licenses came online. The market shifted from MSO oligopoly to a split: MSOs dominate volume, independent craft brands are capturing connoisseur loyalty. The "small-batch" claim is now commoditized — differentiation requires proof: awards, genetics access, and earned community trust. Niche now has the strongest proof point in the state.</p></div>
+    </div>
+  </div>
+
+  <div class="collapse-item">
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div><div class="collapse-trigger-title">Measurement & Attribution</div><div class="collapse-trigger-sub">The attribution constraint, geo-spike methodology, and known data gaps.</div></div>
+      <span class="collapse-arrow">▾</span>
+    </button>
+    <div class="collapse-body">
+      <div class="alert alert-danger" style="margin-bottom:12px"><strong style="color:var(--danger)">The attribution problem: </strong>Cannabis has no DTC transaction. There is no pixel on a dispensary sale. Standard digital attribution does not exist. All consumer-facing marketing produces leading indicators, not closed-loop revenue attribution.</div>
+      <div class="card-accent lime" style="margin-bottom:12px"><div class="label" style="margin-bottom:6px">The geo-spike methodology — best available proxy</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Run geo-targeted paid media around specific dispensary zip codes during a strain drop. Measure sell-through velocity at those accounts vs. non-targeted control accounts. A measurable lift validates that media is driving consumer traffic. This must be validated in Phase 2 before scaling spend.</p></div>
+      <div class="g2">
+        <div class="card"><div class="label" style="margin-bottom:6px">Tools in use</div><div style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--text-3)">Hoodie — sell-through tracking</div><div style="font-size:11px;color:var(--text-3)">Weedmaps — consumer search</div><div style="font-size:11px;color:var(--text-3)">Email platform — B2C + B2B</div><div style="font-size:11px;color:var(--text-3)">Social listening — Reddit, X, Instagram</div><div style="font-size:11px;color:var(--text-3)">Surfside — dispensary ecommerce ads</div></div></div>
+        <div class="card"><div class="label" style="margin-bottom:6px">Known gaps</div><div style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--danger)">Hoodie coverage incomplete across all accounts</div><div style="font-size:11px;color:var(--danger)">No sell-through baselines captured yet</div><div style="font-size:11px;color:var(--danger)">B2C email list quality unverified</div><div style="font-size:11px;color:var(--danger)">Reddit presence near zero today</div><div style="font-size:11px;color:var(--danger)">No geo-spike test has been run yet</div></div></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (window.innerWidth <= 820) toggleNav();
+  window.scrollTo(0, 0);
+}
+
+function toggleCollapse(btn) {
+  const body = btn.nextElementSibling;
+  const arrow = btn.querySelector('.collapse-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function toggleNav() {
+  const nav = document.getElementById('sidenav');
+  const overlay = document.getElementById('nav-overlay');
+  nav.classList.toggle('open');
+  overlay.classList.toggle('open');
+}
+</script>
+</body>
+</html>
