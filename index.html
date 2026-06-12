@@ -75,7 +75,7 @@ strong{font-weight:600}
 }
 #topbar .brand{
   font-family:'DM Mono',monospace;font-size:12px;font-weight:500;
-  letter-spacing:.12em;text-transform:uppercase;color:#FFFFFF;
+  letter-spacing:.12em;text-transform:uppercase;color:#C8F135;
 }
 #topbar .topbar-right{
   display:flex;align-items:center;gap:16px;
@@ -111,14 +111,14 @@ strong{font-weight:600}
 }
 .nav-item:hover{color:#E4E4E7;background:#27272A}
 .nav-item.active{
-  color:#FFFFFF;font-weight:500;
-  border-left-color:#FFFFFF;background:#27272A;
+  color:#C8F135;font-weight:500;
+  border-left-color:#C8F135;background:#27272A;
 }
 .nav-dot{
   width:5px;height:5px;border-radius:50%;
   background:#52525B;flex-shrink:0;
 }
-.nav-item.active .nav-dot{background:#FFFFFF}
+.nav-item.active .nav-dot{background:#C8F135}
 .nav-section-label{
   font-size:10px;letter-spacing:.1em;text-transform:uppercase;
   color:#52525B;padding:20px 20px 6px;
@@ -434,7 +434,7 @@ strong{font-weight:600}
 <nav id="sidenav">
   <div class="nav-section-label">Core</div>
   <button class="nav-item active" onclick="show('summary',this)"><span class="nav-dot"></span>Executive Summary</button>
-  <button class="nav-item" onclick="show('scorecard',this)"><span class="nav-dot"></span>Agency Scorecard</button>
+  <button class="nav-item" onclick="show('scorecard',this)"><span class="nav-dot"></span>KPIs</button>
   <button class="nav-item" onclick="show('priorities',this)"><span class="nav-dot"></span>Top 5 Priorities</button>
   <button class="nav-item" onclick="show('roadmap',this)"><span class="nav-dot"></span>90-Day Roadmap</button>
   <div class="nav-section-label">Analysis</div>
@@ -523,11 +523,11 @@ strong{font-weight:600}
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════ AGENCY SCORECARD -->
+<!-- ═══════════════════════════════════════════════════════ MARKETING KPIS -->
 <section id="scorecard" class="section">
-  <div class="eyebrow">Agency Success Scorecard</div>
+  <div class="eyebrow">Marketing KPIs</div>
   <h1 class="page-title">What we're trying to improve — and how we'll know</h1>
-  <p class="page-sub">Answers "Is Ecomm Cartel performing?" before discussing priorities. Three groups with explicit ownership and attribution.</p>
+  <p class="page-sub">Answers "Is Marketing performing?" before discussing priorities. Three groups with explicit ownership and attribution.</p>
 
   <!-- Group 1: Executive Business KPIs -->
   <div style="margin-bottom:24px">
@@ -535,7 +535,7 @@ strong{font-weight:600}
       <div style="width:3px;height:18px;background:var(--green);border-radius:2px"></div>
       <div style="font-size:14px;font-weight:600;color:var(--text)">Executive Business KPIs</div>
     </div>
-    <p style="font-size:11px;color:var(--text-3);margin-bottom:10px;padding-left:13px">Leadership monitors these. Agency influence is low to none — these are business health metrics owned by sales and ops.</p>
+    <p style="font-size:11px;color:var(--text-3);margin-bottom:10px;padding-left:13px">Leadership monitors these. Marketing influence is low to none — these are business health metrics owned by sales and ops.</p>
     <div class="ga" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
       <div class="kpi-card" style="border-top:2px solid var(--green)">
         <div class="kpi-name">Retail sell-through velocity</div>
@@ -576,53 +576,53 @@ strong{font-weight:600}
       <div class="kpi-card" style="border-top:2px solid var(--amber)">
         <div class="kpi-name">Brand search volume</div>
         <div class="kpi-why">Consumer actively seeking Niche product. Best available demand proxy.</div>
-        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: marketing</span><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div></div>
       </div>
       <div class="kpi-card" style="border-top:2px solid var(--amber)">
         <div class="kpi-name">Weedmaps search volume</div>
         <div class="kpi-why">In-platform demand signal. Only moves if awareness + distribution both exist.</div>
-        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: marketing</span><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div></div>
       </div>
       <div class="kpi-card" style="border-top:2px solid var(--amber)">
         <div class="kpi-name">Store locator clicks</div>
         <div class="kpi-why">Intent signal — consumer trying to find product. Tracks campaign-to-consideration conversion.</div>
-        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: marketing</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
       </div>
       <div class="kpi-card" style="border-top:2px solid var(--amber)">
         <div class="kpi-name">Email subscriber growth</div>
         <div class="kpi-why">Owned audience baseline: ~3,000. Quality (NJ-based, age-verified) matters more than volume.</div>
-        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: marketing</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
       </div>
       <div class="kpi-card" style="border-top:2px solid var(--amber)">
         <div class="kpi-name">Reddit / social mentions</div>
         <div class="kpi-why">Organic community trust. How Clade9 earned default recommendation status. Niche starts near zero.</div>
-        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: agency</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-dark">owner: marketing</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
       </div>
     </div>
   </div>
 
-  <!-- Group 3: Agency Performance KPIs -->
+  <!-- Group 3: Marketing Performance KPIs -->
   <div style="margin-bottom:24px">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
       <div style="width:3px;height:18px;background:var(--purple);border-radius:2px"></div>
-      <div style="font-size:14px;font-weight:600;color:var(--text)">Agency Performance KPIs</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text)">Marketing Performance KPIs</div>
     </div>
-    <p style="font-size:11px;color:var(--text-3);margin-bottom:10px;padding-left:13px">What Ecomm Cartel is directly accountable for. All are leading indicators — not revenue.</p>
+    <p style="font-size:11px;color:var(--text-3);margin-bottom:10px;padding-left:13px">What Marketing is directly accountable for. All are leading indicators — not revenue.</p>
     <div class="ga" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
       <div class="kpi-card" style="border-top:2px solid var(--purple)">
         <div class="kpi-name">Email engagement rate</div>
         <div class="kpi-why">Target: 25%+ open / 4%+ CTR on strain drops. Baseline unknown — establish in Phase 1.</div>
-        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-purple">marketing-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
       </div>
       <div class="kpi-card" style="border-top:2px solid var(--purple)">
         <div class="kpi-name">Social engagement quality</div>
         <div class="kpi-why">Saves + shares, not followers. Saves = purchase research. Shares = organic amplification.</div>
-        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-amber">leading</span><span class="tag tag-purple">marketing-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
       </div>
       <div class="kpi-card" style="border-top:2px solid var(--purple)">
         <div class="kpi-name">Cup win earned reach</div>
         <div class="kpi-why">Time-sensitive. Track coverage volume and decay. Alert if reach stalls by day 45.</div>
-        <div class="kpi-tags"><span class="tag tag-danger">90-day window</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-danger">90-day window</span><span class="tag tag-purple">marketing-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
       </div>
       <div class="kpi-card" style="border-top:2px solid var(--purple)">
         <div class="kpi-name">Geo-spike sell-through lift</div>
@@ -632,14 +632,14 @@ strong{font-weight:600}
       <div class="kpi-card" style="border-top:2px solid var(--purple)">
         <div class="kpi-name">Reporting coverage</div>
         <div class="kpi-why">Are all channels reported accurately and on time? Missing data = inability to make decisions.</div>
-        <div class="kpi-tags"><span class="tag tag-dark">lagging</span><span class="tag tag-purple">agency-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
+        <div class="kpi-tags"><span class="tag tag-dark">lagging</span><span class="tag tag-purple">marketing-owned</span><div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">high</span></div></div>
       </div>
     </div>
   </div>
 
   <div class="card-accent teal">
-    <div class="label" style="margin-bottom:6px">90-day agency review criteria</div>
-    <p style="font-size:12px;color:var(--text-3);line-height:1.65">At day 90, the retain/adjust/expand decision is based on leading indicators only: email growing, cup win in wide circulation, Reddit mentions rising, geo-spike test showing sell-through lift. <strong style="color:var(--text)">Revenue is not a valid 90-day agency metric.</strong> It is a 6–12 month lagging signal.</p>
+    <div class="label" style="margin-bottom:6px">90-day marketing review criteria</div>
+    <p style="font-size:12px;color:var(--text-3);line-height:1.65">At day 90, the retain/adjust/expand decision is based on leading indicators only: email growing, cup win in wide circulation, Reddit mentions rising, geo-spike test showing sell-through lift. <strong style="color:var(--text)">Revenue is not a valid 90-day marketing metric.</strong> It is a 6–12 month lagging signal.</p>
   </div>
 </section>
 
@@ -655,7 +655,7 @@ strong{font-weight:600}
       <div class="priority-num" style="color:var(--danger)">01</div>
       <div>
         <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Convert the High Times Cup win into market position</div>
-        <div class="priority-tags"><span class="tag tag-danger">Critical</span><span class="tag tag-danger">Immediate</span><span class="tag tag-purple">CEO + Agency</span></div>
+        <div class="priority-tags"><span class="tag tag-danger">Critical</span><span class="tag tag-danger">Immediate</span><span class="tag tag-purple">CEO + Marketing</span></div>
         <div class="priority-why">First-ever NJ cup. Niche swept the flower podium. No other NJ craft brand holds this credential today. This win is worth more in the next 90 days than in the next 12 months — every B2B touchpoint, email, social post, and budtender training asset must be built around it now.</div>
         <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Consumer awareness</span><span class="tag tag-lime">Retail adoption</span><span class="tag tag-lime">Inbound leads</span></div>
       </div>
@@ -685,8 +685,8 @@ strong{font-weight:600}
       <div class="priority-num" style="color:var(--amber)">04</div>
       <div>
         <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Define Goodies brand identity and expand distribution</div>
-        <div class="priority-tags"><span class="tag tag-amber">High</span><span class="tag tag-amber">This quarter</span><span class="tag tag-purple">CEO + Agency + Sales</span></div>
-        <div class="priority-why">Production is moving to 80% Goodies. Without a defined brand identity and dispensary penetration in South and Central NJ, the volume engine has no pull. This is a CEO-level decision that cannot be delegated to the agency.</div>
+        <div class="priority-tags"><span class="tag tag-amber">High</span><span class="tag tag-amber">This quarter</span><span class="tag tag-purple">CEO + Marketing + Sales</span></div>
+        <div class="priority-why">Production is moving to 80% Goodies. Without a defined brand identity and dispensary penetration in South and Central NJ, the volume engine has no pull. This is a CEO-level decision that cannot be delegated to the marketing team.</div>
         <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Revenue</span><span class="tag tag-lime">Distribution</span><span class="tag tag-lime">Account volume</span></div>
       </div>
     </div>
@@ -695,7 +695,7 @@ strong{font-weight:600}
       <div class="priority-num" style="color:var(--teal)">05</div>
       <div>
         <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Validate geo-spike methodology before scaling paid media</div>
-        <div class="priority-tags"><span class="tag tag-teal">High</span><span class="tag tag-teal">This quarter</span><span class="tag tag-purple">Agency + Sales</span></div>
+        <div class="priority-tags"><span class="tag tag-teal">High</span><span class="tag tag-teal">This quarter</span><span class="tag tag-purple">Marketing + Sales</span></div>
         <div class="priority-why">Cannabis has no pixel-level attribution. Geo-spike is the only available proxy — run targeted ads near specific dispensaries, measure sell-through lift vs. controls. Scaling media spend without a validated test means spending against signals that cannot be verified.</div>
         <div class="priority-ties"><span class="ties-label">ties to →</span><span class="tag tag-lime">Measurement</span><span class="tag tag-lime">Media efficiency</span><span class="tag tag-lime">Attribution</span></div>
       </div>
@@ -730,15 +730,15 @@ strong{font-weight:600}
         <div class="roadmap-item-detail">Set a specific packaged-units-per-week target and hold ops to it. Marketing campaigns are wasted if accounts cannot be fulfilled.</div>
       </div>
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">Launch cup win campaign across all channels</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency</span><span class="tag tag-lime">Awareness</span></div></div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Launch cup win campaign across all channels</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Marketing</span><span class="tag tag-lime">Awareness</span></div></div>
         <div class="roadmap-item-detail">Every email, social post, and B2B touchpoint references the NJ cup sweep. First 30 days post-win are the highest-value amplification window.</div>
       </div>
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">Define Goodies brand pillars and visual identity</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO + Agency</span><span class="tag tag-lime">Distribution</span></div></div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Define Goodies brand pillars and visual identity</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO + Marketing</span><span class="tag tag-lime">Distribution</span></div></div>
         <div class="roadmap-item-detail">CEO-level decision — not delegatable. Goodies heads to 80% of production; identity must be locked before distribution scales.</div>
       </div>
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">Select 3–5 geo-spike test accounts with Hoodie coverage</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Sales + Agency</span><span class="tag tag-lime">Measurement</span></div></div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Select 3–5 geo-spike test accounts with Hoodie coverage</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Sales + Marketing</span><span class="tag tag-lime">Measurement</span></div></div>
         <div class="roadmap-item-detail">Identify accounts with reliable sell-through data. Baselines accrue over 30 days before any media runs.</div>
       </div>
     </div>
@@ -756,7 +756,7 @@ strong{font-weight:600}
     </div>
     <div style="padding-left:15px">
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">Execute geo-spike test — first paid media strain drop</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency + Sales + Ops</span><span class="tag tag-amber">Sell-through</span></div></div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Execute geo-spike test — first paid media strain drop</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Marketing + Sales + Ops</span><span class="tag tag-amber">Sell-through</span></div></div>
         <div class="roadmap-item-detail">Run paid media around test accounts during a Niche drop. Require: stock confirmed, baselines captured. Measure sell-through lift vs. controls for 21 days post-launch.</div>
       </div>
       <div class="roadmap-item">
@@ -772,7 +772,7 @@ strong{font-weight:600}
         <div class="roadmap-item-detail">Pull sell-through lift from test accounts vs. controls. If validated: scale media. If not: diagnose which variable failed before spending more.</div>
       </div>
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">Activate B2B email for non-carrying dispensary buyers</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency</span><span class="tag tag-amber">Retail adoption</span></div></div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Activate B2B email for non-carrying dispensary buyers</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Marketing</span><span class="tag tag-amber">Retail adoption</span></div></div>
         <div class="roadmap-item-detail">Cup win + brand story deployed as a B2B conversion sequence to dispensary buyers who haven't yet committed.</div>
       </div>
     </div>
@@ -785,12 +785,12 @@ strong{font-weight:600}
       <div>
         <div style="display:flex;gap:6px;margin-bottom:4px"><span class="tag tag-teal">Phase 3</span><span class="tag tag-dark">Days 61–90</span></div>
         <div style="font-size:14px;font-weight:600;color:var(--text)">Scale & review</div>
-        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Scale validated channels. Review agency performance. Set Q2 targets.</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Scale validated channels. Review marketing performance. Set Q2 targets.</div>
       </div>
     </div>
     <div style="padding-left:15px">
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">Scale geo-spike media if Phase 2 validated</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Agency</span><span class="tag tag-teal">Sell-through</span></div></div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Scale geo-spike media if Phase 2 validated</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Marketing</span><span class="tag tag-teal">Sell-through</span></div></div>
         <div class="roadmap-item-detail">Expand geo-targeting to all active accounts with confirmed stock. Scale the model, not just the budget.</div>
       </div>
       <div class="roadmap-item">
@@ -798,12 +798,12 @@ strong{font-weight:600}
         <div class="roadmap-item-detail">Use Phase 2 data to refine the Goodies pitch, adjust SKU mix, and determine whether the 80/20 production target is achievable on schedule.</div>
       </div>
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">90-day agency review against scorecard metrics</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO</span><span class="tag tag-teal">Agency ROI</span></div></div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">90-day marketing review against scorecard metrics</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO</span><span class="tag tag-teal">Marketing ROI</span></div></div>
         <div class="roadmap-item-detail">Review email growth, cup win reach, Reddit mentions, geo-spike lift. Revenue is not a valid 90-day metric. Retain/adjust/expand decision is based on leading indicators only.</div>
       </div>
       <div class="roadmap-item">
-        <div class="roadmap-item-header"><span class="roadmap-item-title">Build Q2 strain drop calendar — tri-party coordination</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Ops + Sales + Agency</span><span class="tag tag-teal">Revenue</span></div></div>
-        <div class="roadmap-item-detail">Agency needs 2–3 weeks lead time. Ops commits a packaging-complete date. Sales pre-books orders. Formal release calendar with hard dates, not a rolling conversation.</div>
+        <div class="roadmap-item-header"><span class="roadmap-item-title">Build Q2 strain drop calendar — tri-party coordination</span><div style="display:flex;gap:5px"><span class="tag tag-purple">Ops + Sales + Marketing</span><span class="tag tag-teal">Revenue</span></div></div>
+        <div class="roadmap-item-detail">Marketing needs 2–3 weeks lead time. Ops commits a packaging-complete date. Sales pre-books orders. Formal release calendar with hard dates, not a rolling conversation.</div>
       </div>
       <div class="roadmap-item">
         <div class="roadmap-item-header"><span class="roadmap-item-title">Set formal Q2 targets based on real data</span><div style="display:flex;gap:5px"><span class="tag tag-purple">CEO</span><span class="tag tag-teal">All drivers</span></div></div>
@@ -817,7 +817,7 @@ strong{font-weight:600}
 <section id="engine" class="section">
   <div class="eyebrow">Growth Engine</div>
   <h1 class="page-title">Revenue chain — stage by stage</h1>
-  <p class="page-sub">The chain breaks if any stage is under-resourced. Agency influence is explicitly rated at every stage.</p>
+  <p class="page-sub">The chain breaks if any stage is under-resourced. Marketing influence is explicitly rated at every stage.</p>
 
   <div style="display:flex;flex-direction:column">
 
@@ -827,7 +827,7 @@ strong{font-weight:600}
         <div><div class="engine-stage-name" style="color:var(--text-3)">Cultivation</div><div class="engine-detail">Elite genetics, indoor hand-trim. Nothing downstream works if this cannot ship.</div></div>
         <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Operations</div><div style="font-size:11px;color:var(--text-3)">Packaged units / week</div></div>
         <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Backlog constraint</div></div>
-        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
+        <div><div class="label">Marketing influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div></div>
       </div></div>
     </div>
 
@@ -837,7 +837,7 @@ strong{font-weight:600}
         <div><div class="engine-stage-name" style="color:var(--teal)">Distribution</div><div class="engine-detail">Licensed distributor delivers to dispensaries. Account count determines sell-through surface area.</div></div>
         <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Ops + Sales</div><div style="font-size:11px;color:var(--text-3)">Active accounts</div></div>
         <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Geographic concentration</div></div>
-        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div></div>
+        <div><div class="label">Marketing influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div></div>
       </div></div>
     </div>
 
@@ -847,7 +847,7 @@ strong{font-weight:600}
         <div><div class="engine-stage-name" style="color:var(--teal)">Retail adoption</div><div class="engine-detail">Dispensary buyer says yes. Driven by sales relationships, cup win, and prior reputation.</div></div>
         <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Sales team</div><div style="font-size:11px;color:var(--text-3)">New accounts / month</div></div>
         <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Single-rep dependency</div></div>
-        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">B2B email, brand credibility</div></div>
+        <div><div class="label">Marketing influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">B2B email, brand credibility</div></div>
       </div></div>
     </div>
 
@@ -855,9 +855,9 @@ strong{font-weight:600}
       <div class="engine-line-col"><div class="engine-dot" style="background:var(--amber)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
       <div><div class="engine-card" style="border-left:3px solid var(--amber)">
         <div><div class="engine-stage-name" style="color:var(--amber)">Consumer demand</div><div class="engine-detail">Consumer pull — someone walking in asking for Niche by name. Currently weak outside Hudson.</div></div>
-        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Agency + Brand</div><div style="font-size:11px;color:var(--text-3)">Weedmaps impressions / email CTR</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Marketing + Brand</div><div style="font-size:11px;color:var(--text-3)">Weedmaps impressions / email CTR</div></div>
         <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Cup win window perishable</div></div>
-        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Social, email, geo ads</div></div>
+        <div><div class="label">Marketing influence</div><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Social, email, geo ads</div></div>
       </div></div>
     </div>
 
@@ -865,9 +865,9 @@ strong{font-weight:600}
       <div class="engine-line-col"><div class="engine-dot" style="background:var(--amber)"></div><div class="engine-connector" style="background:var(--border)"></div></div>
       <div><div class="engine-card" style="border-left:3px solid var(--amber)">
         <div><div class="engine-stage-name" style="color:var(--amber)">Sell-through</div><div class="engine-detail">Product moving off the shelf. The highest-impact business metric. All other work exists to accelerate this.</div></div>
-        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Sales + Agency</div><div style="font-size:11px;color:var(--text-3)">Units / day per account</div></div>
+        <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Sales + Marketing</div><div style="font-size:11px;color:var(--text-3)">Units / day per account</div></div>
         <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">Budtender knowledge gap</div></div>
-        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Geo-spike, B2B education</div></div>
+        <div><div class="label">Marketing influence</div><div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">medium</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Geo-spike, B2B education</div></div>
       </div></div>
     </div>
 
@@ -877,7 +877,7 @@ strong{font-weight:600}
         <div><div class="engine-stage-name" style="color:var(--green)">Reorders</div><div class="engine-detail">Dispensary buyer calls back. Target: 30 days. Currently inconsistent. A sales operations problem.</div></div>
         <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Sales team</div><div style="font-size:11px;color:var(--text-3)">Days between orders</div></div>
         <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">No CRM or SOP</div></div>
-        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Only via sell-through lift</div></div>
+        <div><div class="label">Marketing influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">low</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Only via sell-through lift</div></div>
       </div></div>
     </div>
 
@@ -887,7 +887,7 @@ strong{font-weight:600}
         <div><div class="engine-stage-name" style="color:var(--green)">Revenue</div><div class="engine-detail">Accounts × order size × reorder frequency. A 6–12 month signal from marketing inputs.</div></div>
         <div><div class="label">Owner · KPI</div><div style="font-size:11px;color:var(--text)">Leadership</div><div style="font-size:11px;color:var(--text-3)">Wholesale $ / month</div></div>
         <div><div class="label">Primary risk</div><div style="font-size:11px;color:var(--danger)">All upstream risks compound</div></div>
-        <div><div class="label">Agency influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Not a 90-day agency metric</div></div>
+        <div><div class="label">Marketing influence</div><div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">none</span></div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Not a 90-day marketing metric</div></div>
       </div></div>
     </div>
 
@@ -981,17 +981,17 @@ strong{font-weight:600}
 <!-- ═══════════════════════════════════════════════════════ WHO CONTROLS WHAT -->
 <section id="value" class="section">
   <div class="eyebrow">Accountability Map</div>
-  <h1 class="page-title">How Ecomm Cartel creates value</h1>
+  <h1 class="page-title">How Marketing creates value</h1>
   <p class="page-sub">The clearest source of misaligned expectations is misattributed outcomes. This map defines what each party controls — and cannot be held responsible for.</p>
 
   <div class="alert alert-lime" style="margin-bottom:20px">
-    <strong style="color:var(--green)">The structural reality: </strong>Ecomm Cartel creates consumer demand that must pass through a dispensary to become revenue. There is no pixel on a dispensary transaction. Every agency metric is a leading indicator. Revenue is a 6–12 month lagging signal — not a 90-day agency accountability metric.
+    <strong style="color:var(--green)">The structural reality: </strong>Marketing creates consumer demand that must pass through a dispensary to become revenue. There is no pixel on a dispensary transaction. Every marketing metric is a leading indicator. Revenue is a 6–12 month lagging signal — not a 90-day marketing accountability metric.
   </div>
 
   <div class="g2">
 
     <div class="zone-card" style="border-left:3px solid var(--green)">
-      <div class="zone-header"><span class="zone-icon" style="color:var(--green)">◎</span><span class="zone-title" style="color:var(--green)">Ecomm Cartel</span></div>
+      <div class="zone-header"><span class="zone-icon" style="color:var(--green)">◎</span><span class="zone-title" style="color:var(--green)">Marketing</span></div>
       <ul class="zone-list">
         <li>Social content creation and posting cadence (Niche + Goodies)</li>
         <li>Paid media — Meta, Google, CTV, OOH strategy and execution</li>
@@ -1045,7 +1045,7 @@ strong{font-weight:600}
         <li>Production split: Niche vs. Goodies (target: 80/20)</li>
         <li>CRC compliance</li>
         <li>Fulfillment reliability — preventing stock-outs</li>
-        <li>Content access for the agency (facility, product shots)</li>
+        <li>Content access for the marketing team (facility, product shots)</li>
       </ul>
       <div class="zone-cant">
         <div class="zone-cant-label">Cannot control</div>
@@ -1064,8 +1064,8 @@ strong{font-weight:600}
         <li>Market entry decisions and geographic expansion</li>
         <li>Product line: strains, SKUs, limited drops</li>
         <li>Genetics sourcing and cultivar partnerships</li>
-        <li>Budget allocation between brands and agency</li>
-        <li>Agency scope, retention, and performance decisions</li>
+        <li>Budget allocation between brands and marketing</li>
+        <li>Marketing scope, retention, and performance decisions</li>
         <li>Investor relations and capital allocation</li>
       </ul>
       <div class="zone-cant">
@@ -1095,7 +1095,7 @@ strong{font-weight:600}
       <div class="g2">
         <div class="card"><div class="label" style="margin-bottom:6px">Niche brand</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Connoisseur/top-shelf. Lower volume, higher margin per unit. Credibility anchor for the entire operation. Wins awards, attracts press, signals quality. ~20% of production (target).</p></div>
         <div class="card"><div class="label" style="margin-bottom:6px">Goodies brand</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Accessible/social. Higher volume, lower margin per unit. Volume engine. Absorbs 80% of cultivation output. Revenue engine at scale. Earlier stage — no established identity yet.</p></div>
-        <div class="card"><div class="label" style="margin-bottom:6px">Consumer demand reality</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">All consumer demand filters through dispensaries. Agency creates conditions but cannot complete the transaction. Every marketing dollar must travel through an intermediary before converting to revenue.</p></div>
+        <div class="card"><div class="label" style="margin-bottom:6px">Consumer demand reality</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">All consumer demand filters through dispensaries. Marketing creates conditions but cannot complete the transaction. Every marketing dollar must travel through an intermediary before converting to revenue.</p></div>
         <div class="card"><div class="label" style="margin-bottom:6px">Distribution risk</div><p style="font-size:12px;color:var(--text-3);line-height:1.65">Hudson County concentration is a live risk. Goodies expansion to South/Central NJ is the natural diversification. Revenue geography should be tracked monthly.</p></div>
       </div>
     </div>
@@ -1153,7 +1153,7 @@ strong{font-weight:600}
 
   <div class="collapse-item">
     <button class="collapse-trigger" onclick="toggleCollapse(this)">
-      <div><div class="collapse-trigger-title">Agency Influence Analysis</div><div class="collapse-trigger-sub">What the agency can and cannot move at each stage of the revenue chain.</div></div>
+      <div><div class="collapse-trigger-title">Marketing Influence Analysis</div><div class="collapse-trigger-sub">What the marketing team can and cannot move at each stage of the revenue chain.</div></div>
       <span class="collapse-arrow">▾</span>
     </button>
     <div class="collapse-body">
@@ -1173,7 +1173,7 @@ strong{font-weight:600}
           <span style="font-size:11px;color:var(--text)">Consumer demand</span>
           <div class="pips"><div class="pip pip-mid"></div><div class="pip pip-mid"></div><div class="pip pip-off"></div><span class="pips-label">Medium</span></div>
           <span class="tag tag-amber" style="font-size:8px">Leading</span>
-          <span style="font-size:11px;color:var(--text-3)">Agency creates conditions; dispensaries complete the transaction.</span>
+          <span style="font-size:11px;color:var(--text-3)">Marketing creates conditions; dispensaries complete the transaction.</span>
         </div>
         <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
           <div style="width:8px;height:8px;border-radius:50%;background:var(--border-strong)"></div>
@@ -1194,14 +1194,14 @@ strong{font-weight:600}
           <span style="font-size:11px;color:var(--text)">Reorders</span>
           <div class="pips"><div class="pip pip-off"></div><div class="pip pip-off"></div><div class="pip pip-off"></div><span class="pips-label">Low</span></div>
           <span class="tag tag-dark" style="font-size:8px">Lagging</span>
-          <span style="font-size:11px;color:var(--text-3)">Output of sell-through + sales follow-up. Agency has no direct lever.</span>
+          <span style="font-size:11px;color:var(--text-3)">Output of sell-through + sales follow-up. Marketing has no direct lever.</span>
         </div>
         <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:9px 80px 2fr 1fr 2fr;gap:10px;align-items:center">
           <div style="width:8px;height:8px;border-radius:50%;background:var(--green)"></div>
           <span style="font-size:11px;color:var(--text)">Measurement</span>
           <div class="pips"><div class="pip pip-on"></div><div class="pip pip-on"></div><div class="pip pip-on"></div><span class="pips-label">High</span></div>
           <span class="tag tag-amber" style="font-size:8px">Leading</span>
-          <span style="font-size:11px;color:var(--text-3)">Agency owns all channel-level reporting infrastructure.</span>
+          <span style="font-size:11px;color:var(--text-3)">Marketing owns all channel-level reporting infrastructure.</span>
         </div>
       </div>
     </div>
